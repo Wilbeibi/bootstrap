@@ -15,8 +15,7 @@ install:
   - "ls $HOME/bundle/ruby/1.9.1/bin || true"
   - "which jekyll || true"
   - "echo PATH is $PATH"
-  - "jekyll -v"
-  - "false"
+  - "GEM_HOME=$HOME/bundle/ruby/1.9.1 jekyll -v"
 after_script:
   - if [ "$TWBS_TEST" = core ]; then time ./test-infra/node_modules_cache.py upload package.json ./node_modules; fi
   - if [ "$TWBS_TEST" = validate-html ]; then time ./test-infra/node_modules_cache.py upload test-infra/Gemfile.lock ~/bundle; fi
