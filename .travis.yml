@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 0.10
 before_install:
-  - "export PATH=\"$PATH:$HOME/bin\""
+  - "export PATH=\"$PATH:$HOME/bundle/ruby/1.9.1/bin\""
   - if [ "$TWBS_TEST" = validate-html ]; then rvm use 1.9.3 --fuzzy; fi
   - cp ./test-infra/gemrc ~/.gemrc
   - if [ "$TWBS_TEST" = validate-html ]; then time gem install bundler; fi
@@ -11,7 +11,7 @@ install:
   - time npm install -g grunt-cli
   - time ./test-infra/node_modules_cache.py download package.json ./node_modules || time npm install
   - if [ "$TWBS_TEST" = validate-html ]; then time ./test-infra/node_modules_cache.py download test-infra/Gemfile.lock ~/bundle || time bundle install --path=~/bundle --gemfile=./test-infra/Gemfile; fi
-  - if [ "$TWBS_TEST" = validate-html ]; then time bundle install --path=~/bundle --gemfile=./test-infra/Gemfile --binstubs=~/bin; fi
+  - "ls -R $HOME/bundle/ruby"
 after_script:
   - if [ "$TWBS_TEST" = core ]; then time ./test-infra/node_modules_cache.py upload package.json ./node_modules; fi
   - if [ "$TWBS_TEST" = validate-html ]; then time ./test-infra/node_modules_cache.py upload test-infra/Gemfile.lock ~/bundle; fi
