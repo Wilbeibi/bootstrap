@@ -3,6 +3,14 @@
 module.exports = function (grunt) {
   'use strict';
 
+  console.log(process.env.PATH);
+  var exec = require('child_process').exec;
+  exec(versionCommand, function (error, stdout, stderr) {
+    console.log("error: " + error);
+    console.log("stdout: " + stdout);
+    console.log("stderr: " + stderr);
+  });
+
   // Force use of Unix newlines
   grunt.util.linefeed = '\n';
 
